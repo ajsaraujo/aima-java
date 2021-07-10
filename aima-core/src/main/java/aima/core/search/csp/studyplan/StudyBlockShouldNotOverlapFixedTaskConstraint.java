@@ -10,11 +10,11 @@ import java.util.List;
  * Verifica se os blocos de estudo se sobrepõem a um determinado
  * intervalo.
  */
-public class ShouldNotOverlapFixedTask implements Constraint<StudyBlock, DayTime> {
+public class StudyBlockShouldNotOverlapFixedTaskConstraint implements Constraint<StudyBlock, DayTime> {
     private final Task fixedTask;
     private final StudyBlock studyBlock;
 
-    public ShouldNotOverlapFixedTask(Task fixedTask, StudyBlock studyBlock) {
+    public StudyBlockShouldNotOverlapFixedTaskConstraint(Task fixedTask, StudyBlock studyBlock) {
         this.fixedTask = fixedTask;
         this.studyBlock = studyBlock;
     }

@@ -28,7 +28,19 @@ public class StudyPlanCSP extends CSP<StudyBlock, DayTime> {
     public void loadConstraints() {
         for (Task task : fixedTasks) {
             for (StudyBlock studyBlock : getVariables()) {
-                addConstraint(new ShouldNotOverlapFixedTask(task, studyBlock));
+                addConstraint(new StudyBlockShouldNotOverlapFixedTaskConstraint(task, studyBlock));
+            }
+        }
+
+        List<StudyBlock> studyBlocks = getVariables();
+
+        for (int i = 0; i < studyBlocks.size(); i++) {
+            StudyBlock one = studyBlocks.get(i);
+
+            for (int j = i + 1; j < studyBlocks.size(); j++) {
+                StudyBlock another = studyBlocks.get(j);
+
+                addConstraint(new StudyBlockShouldNotOverlapOtherStudyBlockConstraint(one, another));
             }
         }
     }
