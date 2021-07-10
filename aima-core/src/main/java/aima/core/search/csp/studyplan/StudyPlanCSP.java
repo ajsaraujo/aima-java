@@ -13,13 +13,20 @@ import java.util.List;
  * que não haja sobreposição de horários.
  */
 public class StudyPlanCSP extends CSP<StudyBlock, DayTime> {
+    private final Time WAKE_UP_TIME = new Time(7, 0);
+    private final Time GO_TO_BED_TIME = new Time(23, 0);
+
     private final List<Task> fixedTasks = new ArrayList<>();
     private final Domain<DayTime> domain = makeDomain();
 
     public StudyPlanCSP() {
         super();
 
-        loadMeals();
+        loadFixedTasks();
+    }
+
+    public void loadConstraints() {
+
     }
 
     public void addSubject(Subject subject) {
@@ -36,10 +43,11 @@ public class StudyPlanCSP extends CSP<StudyBlock, DayTime> {
         fixedTasks.add(task);
     }
 
-    private void loadMeals() {
+    private void loadFixedTasks() {
         Time sevenAM = new Time(7, 0);
         Time twelveAM = new Time(12, 0);
         Time sevenPM = new Time(19, 0);
+
         Time halfAnHour = new Time(0, 30);
         Time oneHour = new Time(1, 0);
 
@@ -47,6 +55,7 @@ public class StudyPlanCSP extends CSP<StudyBlock, DayTime> {
             Task breakfast = new Task("Café da Manhã", new DayTime(day, sevenAM), halfAnHour);
             Task lunch = new Task("Almoço", new DayTime(day, twelveAM), oneHour);
             Task dinner = new Task("Jantar", new DayTime(day, sevenPM), halfAnHour);
+            Task sleep = new Task("Dormir", new DayTime(day, GO_TO_BED_TIME), calculateSleepDuration());
 
             fixedTasks.add(breakfast);
             fixedTasks.add(lunch);
@@ -58,7 +67,7 @@ public class StudyPlanCSP extends CSP<StudyBlock, DayTime> {
         ArrayList<DayTime> domain = new ArrayList<>();
 
         for (Day day : Day.values()) {
-            for (int hours = 0; hours < 24; hours++) {
+            for (int hours = WAKE_UP_TIME.hours; hours < GO_TO_BED_TIME.hours; hours++) {
                 for (int minutes = 0; minutes < 60; minutes += 30) {
                     domain.add(new DayTime(day, new Time(hours, minutes)));
                 }
@@ -66,5 +75,13 @@ public class StudyPlanCSP extends CSP<StudyBlock, DayTime> {
         }
 
         return new Domain<>(domain);
+    }
+
+    private Time calculateSleepDuration() {
+        assert GO_TO_BED_TIME.minutes == 0 && WAKE_UP_TIME.minutes == 0;
+        int HOURS_IN_A_DAY = 24;
+        int sleepHours = HOURS_IN_A_DAY + WAKE_UP_TIME.hours - GO_TO_BED_TIME.hours;
+
+        return new Time(sleepHours, 0);
     }
 }
