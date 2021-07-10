@@ -6,7 +6,7 @@ package aima.core.search.csp.studyplan;
  *   Aula de Programação Imperativa na Segunda-feira
  *   às 13:00. Duração de 2 horas.
  */
-public class Task implements TimeInterval {
+public class Task {
     private final String name;
     private final DayTime startTime;
     private final Time duration;
