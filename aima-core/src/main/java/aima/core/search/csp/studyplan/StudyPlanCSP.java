@@ -1,6 +1,7 @@
 package aima.core.search.csp.studyplan;
 
 import aima.core.search.csp.CSP;
+import aima.core.search.csp.Domain;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.List;
  */
 public class StudyPlanCSP extends CSP<StudyBlock, DayTime> {
     private final List<Task> fixedTasks = new ArrayList<>();
+    private final Domain<DayTime> domain = makeDomain();
 
     public StudyPlanCSP() {
         super();
@@ -27,6 +29,7 @@ public class StudyPlanCSP extends CSP<StudyBlock, DayTime> {
 
     private void addStudyBlock(StudyBlock studyBlock) {
         addVariable(studyBlock);
+        setDomain(studyBlock, domain);
     }
 
     private void addFixedTask(Task task) {
@@ -49,5 +52,19 @@ public class StudyPlanCSP extends CSP<StudyBlock, DayTime> {
             fixedTasks.add(lunch);
             fixedTasks.add(dinner);
         }
+    }
+
+    private Domain<DayTime> makeDomain() {
+        ArrayList<DayTime> domain = new ArrayList<>();
+
+        for (Day day : Day.values()) {
+            for (int hours = 0; hours < 24; hours++) {
+                for (int minutes = 0; minutes < 60; minutes += 30) {
+                    domain.add(new DayTime(day, new Time(hours, minutes)));
+                }
+            }
+        }
+
+        return new Domain<>(domain);
     }
 }
