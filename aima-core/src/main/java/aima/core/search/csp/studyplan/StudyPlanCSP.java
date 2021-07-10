@@ -76,6 +76,7 @@ public class StudyPlanCSP extends CSP<StudyBlock, DayTime> {
             fixedTasks.add(breakfast);
             fixedTasks.add(lunch);
             fixedTasks.add(dinner);
+            fixedTasks.add(sleep);
         }
     }
 

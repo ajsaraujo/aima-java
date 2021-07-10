@@ -13,9 +13,13 @@ public class DayTime {
         this.time = time;
     }
 
+    public String toString() {
+        return day.toString() + " " + time.toString();
+    }
+
     public boolean before(DayTime other) {
         if (day != other.day) {
-            return true;
+            return day.before(other.day);
         }
 
         if (hours() != other.hours()) {

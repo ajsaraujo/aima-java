@@ -12,4 +12,8 @@ public class Time {
         this.hours = hours;
         this.minutes = minutes;
     }
+
+    public String toString() {
+        return hours + " " + minutes;
+    }
 }

@@ -25,6 +25,10 @@ public class StudyBlockShouldNotOverlapOtherStudyBlockConstraint implements Cons
         DayTime anotherStudyTime = assignment.getValue(another);
         Interval anotherStudyInterval = new Interval(anotherStudyTime, another.duration);
 
+        if (oneStudyTime == null || anotherStudyTime == null) {
+            return true;
+        }
+
         return !oneStudyInterval.overlapsWith(anotherStudyInterval);
     }
 }

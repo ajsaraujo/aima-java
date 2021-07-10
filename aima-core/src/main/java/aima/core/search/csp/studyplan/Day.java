@@ -1,18 +1,28 @@
 package aima.core.search.csp.studyplan;
 
 public enum Day {
-    Monday(1),
-    Tuesday(2),
-    Wednesday(3),
-    Thursday(4),
-    Friday(5),
-    Saturday(6),
-    Sunday(7);
+    Monday(1, "Segunda"),
+    Tuesday(2, "Terça"),
+    Wednesday(3, "Quarta"),
+    Thursday(4, "Quinta"),
+    Friday(5, "Sexta"),
+    Saturday(6, "Sábado"),
+    Sunday(7, "Domingo");
 
     private final int index;
+    private final String name;
 
-    Day(int index) {
+    Day(int index, String name) {
         this.index = index;
+        this.name = name;
+    }
+
+    public String toString() {
+        return this.name;
+    }
+
+    public boolean before(Day other) {
+        return this.index < other.index;
     }
 
     Day next() {
