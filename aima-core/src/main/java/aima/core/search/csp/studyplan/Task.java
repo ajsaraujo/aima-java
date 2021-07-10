@@ -7,9 +7,9 @@ package aima.core.search.csp.studyplan;
  *   às 13:00. Duração de 2 horas.
  */
 public class Task {
-    public final String name;
-    public final DayTime startTime;
-    public final Time duration;
+    private final String name;
+    private final DayTime startTime;
+    private final Time duration;
 
     public Task(String name, DayTime startTime, Time duration) {
         this.name = name;

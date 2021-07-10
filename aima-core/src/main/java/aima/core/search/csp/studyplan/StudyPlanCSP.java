@@ -5,16 +5,32 @@ import aima.core.search.csp.CSP;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Neste PSR, cada variável é uma tarefa com
+ * duração pré-determinada. Desejamos atribuir
+ * horários para a execução de cada tarefa de modo
+ * que não haja sobreposição de horários.
+ */
 public class StudyPlanCSP extends CSP<StudyBlock, DayTime> {
-    public final List<Task> fixedTasks;
+    private final List<Task> fixedTasks = new ArrayList<>();
 
-    public StudyPlanCSP(List<StudyBlock> studyBlocks, ArrayList<Task> classes) {
-        super(studyBlocks);
-
-        fixedTasks = new ArrayList<>();
-        fixedTasks.addAll(classes);
+    public StudyPlanCSP() {
+        super();
 
         loadMeals();
+    }
+
+    public void addSubject(Subject subject) {
+        subject.getStudyBlocks().forEach(this::addStudyBlock);
+        subject.getClasses().forEach(this::addFixedTask);
+    }
+
+    private void addStudyBlock(StudyBlock studyBlock) {
+        addVariable(studyBlock);
+    }
+
+    private void addFixedTask(Task task) {
+        fixedTasks.add(task);
     }
 
     private void loadMeals() {

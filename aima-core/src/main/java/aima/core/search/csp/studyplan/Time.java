@@ -5,8 +5,8 @@ package aima.core.search.csp.studyplan;
  * para representar HORÁRIO ou DURAÇÃO.
  */
 public class Time {
-    public final int hours;
-    public final int minutes;
+    private final int hours;
+    private final int minutes;
 
     public Time(int hours, int minutes) {
         this.hours = hours;

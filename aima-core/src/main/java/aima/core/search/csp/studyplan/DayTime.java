@@ -5,8 +5,8 @@ package aima.core.search.csp.studyplan;
  * Ex: Segunda feira às 12h30.
  */
 public class DayTime {
-    public final Day day;
-    public final Time time;
+    private final Day day;
+    private final Time time;
 
     public DayTime(Day day, Time time) {
         this.day = day;

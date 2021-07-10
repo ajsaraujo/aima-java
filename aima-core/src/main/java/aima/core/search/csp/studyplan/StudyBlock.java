@@ -8,7 +8,7 @@ import aima.core.search.csp.Variable;
  * COMP0421 - 1h30 minutos
  */
 public class StudyBlock extends Variable {
-    public final Time duration;
+    private final Time duration;
 
     public StudyBlock(String name, Time duration) {
         super(name);
