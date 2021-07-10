@@ -1,7 +1,6 @@
 package aima.core.search.csp.studyplan;
 
 import aima.core.search.csp.CSP;
-import aima.core.search.csp.Constraint;
 import aima.core.search.csp.Domain;
 
 import java.util.ArrayList;
@@ -28,13 +27,9 @@ public class StudyPlanCSP extends CSP<StudyBlock, DayTime> {
 
     public void loadConstraints() {
         for (Task task : fixedTasks) {
-            ShouldNotOverlapIntervalConstraint constraint = new ShouldNotOverlapIntervalConstraint(task.getInterval());
-
             for (StudyBlock studyBlock : getVariables()) {
-                constraint.addVariable(studyBlock);
+                addConstraint(new ShouldNotOverlapFixedTask(task, studyBlock));
             }
-
-            addConstraint(constraint);
         }
     }
 
