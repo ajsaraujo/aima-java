@@ -1,4 +1,4 @@
-package aima.core.search.csp.studyplan;
+package aima.core.search.csp.studyplan.models;
 
 public class Interval {
     private final DayTime startTime;
@@ -29,5 +29,18 @@ public class Interval {
 
     public boolean overlapsWith(Interval other) {
         return this.startTime.before(other.endTime()) && other.startTime.before(this.endTime());
+    }
+
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder
+            .append(startTime.day.toString())
+            .append(" das ")
+            .append(startTime.time.toString())
+            .append(" às ")
+            .append(endTime().time.toString());
+
+        return stringBuilder.toString();
     }
 }

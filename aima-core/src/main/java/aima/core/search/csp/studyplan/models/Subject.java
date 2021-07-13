@@ -1,4 +1,4 @@
-package aima.core.search.csp.studyplan;
+package aima.core.search.csp.studyplan.models;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -9,7 +9,7 @@ import java.util.List;
  * horários de aula e blocos de estudo.
  */
 public class Subject {
-    private final String name;
+    public final String name;
     private final ArrayList<Task> classes;
     private final ArrayList<StudyBlock> studyBlocks;
 
@@ -25,7 +25,7 @@ public class Subject {
     }
 
     public void addStudyBlock(Time duration) {
-        studyBlocks.add(new StudyBlock("Estudar " + name, duration));
+        studyBlocks.add(new StudyBlock("Estudar " + name + " (" + (studyBlocks.size() + 1 ) + ")", duration));
     }
 
     public List<Task> getClasses() {

@@ -1,9 +1,9 @@
 package aima.test.core.unit.search.csp.studyplan;
 
-import aima.core.search.csp.studyplan.Day;
-import aima.core.search.csp.studyplan.DayTime;
-import aima.core.search.csp.studyplan.Interval;
-import aima.core.search.csp.studyplan.Time;
+import aima.core.search.csp.studyplan.models.Day;
+import aima.core.search.csp.studyplan.models.DayTime;
+import aima.core.search.csp.studyplan.models.Interval;
+import aima.core.search.csp.studyplan.models.Time;
 import org.junit.Assert;
 import org.junit.Test;
 

@@ -1,7 +1,10 @@
-package aima.core.search.csp.studyplan;
+package aima.core.search.csp.studyplan.constraints;
 
 import aima.core.search.csp.Assignment;
 import aima.core.search.csp.Constraint;
+import aima.core.search.csp.studyplan.models.DayTime;
+import aima.core.search.csp.studyplan.models.Interval;
+import aima.core.search.csp.studyplan.models.StudyBlock;
 
 import java.util.List;
 

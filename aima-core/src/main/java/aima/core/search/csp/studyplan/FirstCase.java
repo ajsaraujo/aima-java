@@ -3,7 +3,7 @@ package aima.core.search.csp.studyplan;
 import aima.core.search.csp.Assignment;
 import aima.core.search.csp.CspSolver;
 import aima.core.search.csp.FlexibleBacktrackingSolver;
-import aima.core.search.csp.Variable;
+import aima.core.search.csp.studyplan.models.*;
 
 import java.util.Optional;
 

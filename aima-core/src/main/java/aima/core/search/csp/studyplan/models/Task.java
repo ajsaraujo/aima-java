@@ -1,4 +1,4 @@
-package aima.core.search.csp.studyplan;
+package aima.core.search.csp.studyplan.models;
 
 /**
  * Uma tarefa com nome, dia, horário e duração.

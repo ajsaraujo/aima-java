@@ -1,4 +1,4 @@
-package aima.core.search.csp.studyplan;
+package aima.core.search.csp.studyplan.models;
 
 public enum Day {
     Monday(1, "Segunda"),

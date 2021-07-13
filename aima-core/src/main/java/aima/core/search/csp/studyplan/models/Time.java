@@ -1,4 +1,4 @@
-package aima.core.search.csp.studyplan;
+package aima.core.search.csp.studyplan.models;
 
 /**
  * Horas e minutos. Pode ser utilizado
@@ -14,6 +14,12 @@ public class Time {
     }
 
     public String toString() {
-        return hours + " " + minutes;
+        return format(hours) + ":" + format(minutes);
+    }
+
+    private String format(int number) {
+        String str = String.valueOf(number);
+        String zeroPaddedNumber = '0' + str;
+        return str.length() >= 2 ? str : zeroPaddedNumber;
     }
 }

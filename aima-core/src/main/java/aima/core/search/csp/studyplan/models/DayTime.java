@@ -1,4 +1,4 @@
-package aima.core.search.csp.studyplan;
+package aima.core.search.csp.studyplan.models;
 
 /**
  * Dia e hora.
@@ -6,7 +6,7 @@ package aima.core.search.csp.studyplan;
  */
 public class DayTime {
     public final Day day;
-    private final Time time;
+    public final Time time;
 
     public DayTime(Day day, Time time) {
         this.day = day;
@@ -14,7 +14,7 @@ public class DayTime {
     }
 
     public String toString() {
-        return day.toString() + " " + time.toString();
+        return day.toString() + " às " + time.toString();
     }
 
     public boolean before(DayTime other) {

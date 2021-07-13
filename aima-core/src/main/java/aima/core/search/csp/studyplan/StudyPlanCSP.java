@@ -2,6 +2,9 @@ package aima.core.search.csp.studyplan;
 
 import aima.core.search.csp.CSP;
 import aima.core.search.csp.Domain;
+import aima.core.search.csp.studyplan.constraints.StudyBlockShouldNotOverlapFixedTaskConstraint;
+import aima.core.search.csp.studyplan.constraints.StudyBlockShouldNotOverlapOtherStudyBlockConstraint;
+import aima.core.search.csp.studyplan.models.*;
 
 import java.util.ArrayList;
 import java.util.List;
