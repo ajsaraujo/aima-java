@@ -55,7 +55,21 @@ public class StudyPlanCSP extends CSP<StudyBlock, DayTime> {
 
     private void addStudyBlock(StudyBlock studyBlock) {
         addVariable(studyBlock);
-        setDomain(studyBlock, domain);
+        loadDomain(studyBlock);
+    }
+
+    private void loadDomain(StudyBlock studyBlock) {
+        ArrayList<DayTime> subdomain = new ArrayList<>();
+
+        for (DayTime value : domain) {
+            Interval interval = new Interval(value, studyBlock.duration);
+
+            if (!interval.endsPastMidnight()) {
+                subdomain.add(value);
+            }
+        }
+
+        setDomain(studyBlock, new Domain<>(subdomain));
     }
 
     private void addFixedTask(Task task) {

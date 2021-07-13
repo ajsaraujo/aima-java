@@ -5,9 +5,9 @@ public enum Day {
     Tuesday(2, "Terça"),
     Wednesday(3, "Quarta"),
     Thursday(4, "Quinta"),
-    Friday(5, "Sexta"),
-    Saturday(6, "Sábado"),
-    Sunday(7, "Domingo");
+    Friday(5, "Sexta");
+    // Saturday(6, "Sábado"),
+    // Sunday(7, "Domingo");
 
     private final int index;
     private final String name;
@@ -27,6 +27,9 @@ public enum Day {
 
     Day next() {
         switch (index) {
+            case 0:
+            case 5:
+                return Day.Monday;
             case 1:
                 return Day.Tuesday;
             case 2:
@@ -35,14 +38,12 @@ public enum Day {
                 return Day.Thursday;
             case 4:
                 return Day.Friday;
-            case 5:
-                return Day.Saturday;
-            case 6:
+            /**
+                case 6:
                 return Day.Sunday;
-            case 7:
-                return Day.Monday;
+                 **/
         }
 
-        throw new RuntimeException("Expected day to have an index between 1 and 7");
+        throw new RuntimeException("Expected day to have an index between 0 and 4");
     }
 }

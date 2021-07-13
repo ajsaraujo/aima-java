@@ -11,6 +11,7 @@ public class Interval {
 
     public DayTime endTime() {
         Day day = startTime.day;
+
         int minutes = startTime.minutes() + duration.minutes;
         int hours = startTime.hours() + duration.hours;
 
@@ -32,6 +33,10 @@ public class Interval {
         boolean intervalsIntersect = startTime.before(other.endTime()) && other.startTime.before(endTime());
 
         return intervalsAreEqual || intervalsIntersect;
+    }
+
+    public boolean endsPastMidnight() {
+        return endTime().day != startTime.day;
     }
 
     public String toString() {

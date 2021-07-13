@@ -8,6 +8,10 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class IntervalTest {
+    DayTime mondayEightPM = new DayTime(Day.Monday, new Time(20, 0));
+    DayTime mondayHalfPastEightPM = new DayTime(Day.Monday, new Time(20, 30));
+    Time fourHours = new Time(4, 0);
+
     @Test
     public void overlapShouldReturnFalseIfIntervalsDontOverlap() {
         Interval one = new Interval(new DayTime(Day.Monday, new Time(7, 0)), new Time(1, 0));
@@ -26,9 +30,33 @@ public class IntervalTest {
 
     @Test
     public void overlapShouldReturnTrueIfIntervalsAreEqual() {
-        Interval one = new Interval(new DayTime(Day.Sunday, new Time(20, 0)), new Time(4, 0));
-        Interval another = new Interval(new DayTime(Day.Sunday, new Time(20, 0)), new Time(4, 0));
+        Interval one = new Interval(new DayTime(Day.Monday, new Time(20, 0)), new Time(4, 0));
+        Interval another = new Interval(new DayTime(Day.Monday, new Time(20, 0)), new Time(4, 0));
 
         Assert.assertTrue(one.overlapsWith(another));
+    }
+
+    @Test
+    public void yetAnotherIntervalOverlapTest() {
+        Interval one = new Interval(mondayEightPM, fourHours);
+        Interval another = new Interval(mondayHalfPastEightPM, fourHours);
+
+        Assert.assertTrue(one.overlapsWith(another));
+    }
+
+    @Test
+    public void endTimeShouldBeComputedCorrectly() {
+        Interval interval = new Interval(mondayEightPM, fourHours);
+        DayTime endTime = interval.endTime();
+
+        Assert.assertEquals(endTime.day, Day.Tuesday);
+        Assert.assertEquals(endTime.hours(), 0);
+        Assert.assertEquals(endTime.minutes(), 0);
+    }
+
+    @Test
+    public void beforeShouldBeComputedCorrectly() {
+        DayTime midnightTuesday = new DayTime(Day.Tuesday, new Time(0, 0));
+        Assert.assertTrue(mondayEightPM.before(midnightTuesday));
     }
 }
