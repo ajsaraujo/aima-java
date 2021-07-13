@@ -14,26 +14,18 @@ import java.util.Optional;
 import java.util.Scanner;
 
 public class Main {
-    private static final Scanner scanner = new Scanner(System.in);
-
     public static void main(String[] args) throws InterruptedException {
         Case testCase = pickCase();
 
         testCase.readStudyGoals();
 
-        CSP<StudyBlock, DayTime> csp = testCase.toCSP();
+        StudyPlanCSP csp = testCase.toCSP();
         CspSolver solver = new FlexibleBacktrackingSolver().setAll();
         Optional<Assignment<StudyBlock, DayTime>> solution = solver.solve(csp);
 
         if (solution.isPresent()) {
             Assignment<StudyBlock, DayTime> assignment = solution.get();
-
-            System.out.println("Suas tarefas:");
-
-            for (StudyBlock variable : assignment.getVariables()) {
-                DayTime dayTime = assignment.getValue(variable);
-                System.out.println(new Interval(dayTime, variable.duration).toString() + " - " + variable.getName());
-            }
+            csp.showSchedule(assignment);
         } else {
             System.out.println("Nenhuma solução foi encontrada. Por favor, tente novamente.");
         }

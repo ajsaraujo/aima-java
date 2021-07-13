@@ -8,13 +8,19 @@ package aima.core.search.csp.studyplan.models;
  */
 public class Task {
     private final String name;
-    private final DayTime startTime;
+    public final DayTime startTime;
     private final Time duration;
 
     public Task(String name, DayTime startTime, Time duration) {
         this.name = name;
         this.startTime = startTime;
         this.duration = duration;
+    }
+
+    public String toString() {
+        Interval interval = new Interval(startTime, duration);
+
+        return new StringBuilder().append(interval).append(" - ").append(name).toString();
     }
 
     public Interval getInterval() {

@@ -43,8 +43,6 @@ public class Interval {
         StringBuilder stringBuilder = new StringBuilder();
 
         stringBuilder
-            .append(startTime.day.toString())
-            .append(" das ")
             .append(startTime.time.toString())
             .append(" às ")
             .append(endTime().time.toString());

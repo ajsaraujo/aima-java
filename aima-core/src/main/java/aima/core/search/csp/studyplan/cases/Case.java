@@ -34,7 +34,7 @@ public abstract class Case {
         }
     }
 
-    public CSP<StudyBlock, DayTime> toCSP() {
+    public StudyPlanCSP toCSP() {
         StudyPlanCSP csp = new StudyPlanCSP();
 
         subjects.forEach(csp::addSubject);

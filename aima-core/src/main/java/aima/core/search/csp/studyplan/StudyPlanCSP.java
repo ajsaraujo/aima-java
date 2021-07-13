@@ -1,5 +1,6 @@
 package aima.core.search.csp.studyplan;
 
+import aima.core.search.csp.Assignment;
 import aima.core.search.csp.CSP;
 import aima.core.search.csp.Domain;
 import aima.core.search.csp.studyplan.constraints.StudyBlockShouldNotOverlapFixedTaskConstraint;
@@ -8,6 +9,8 @@ import aima.core.search.csp.studyplan.models.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.Set;
 
 /**
  * Neste PSR, cada variável é uma tarefa com
@@ -53,6 +56,38 @@ public class StudyPlanCSP extends CSP<StudyBlock, DayTime> {
         subject.getClasses().forEach(this::addFixedTask);
     }
 
+    public void showSchedule(Assignment<StudyBlock, DayTime> assignment) {
+        for (Day day : Day.values()) {
+            System.out.println(day.name().toUpperCase());
+
+            List<Task> todaysTasks = getTodaysFixedTasks(day);
+
+            for (StudyBlock studyBlock : assignment.getVariables()) {
+                DayTime dayTime = assignment.getValue(studyBlock);
+
+                if (dayTime.day.equals(day)) {
+                    todaysTasks.add(new Task(studyBlock.getName(), dayTime, studyBlock.duration));
+                }
+            }
+
+            for (Task task : todaysTasks) {
+                System.out.println(task.toString());
+            }
+        }
+    }
+
+    private List<Task> getTodaysFixedTasks(Day day) {
+        List<Task> todaysFixedTasks = new ArrayList<>();
+
+        for (Task task : fixedTasks) {
+            if (task.startTime.day.equals(day)) {
+                todaysFixedTasks.add(task);
+            }
+        }
+
+        return todaysFixedTasks;
+    }
+
     private void addStudyBlock(StudyBlock studyBlock) {
         addVariable(studyBlock);
         loadDomain(studyBlock);
@@ -64,12 +99,23 @@ public class StudyPlanCSP extends CSP<StudyBlock, DayTime> {
         for (DayTime value : domain) {
             Interval interval = new Interval(value, studyBlock.duration);
 
-            if (!interval.endsPastMidnight()) {
+            boolean studyWillEndBeforeMidnight = !interval.endsPastMidnight();
+            boolean studyWillEndBeforeBedTime = !endsBeforeBedTime(interval);
+            boolean startTimeIsValid = studyWillEndBeforeMidnight && studyWillEndBeforeBedTime;
+
+            if (startTimeIsValid) {
                 subdomain.add(value);
             }
         }
 
         setDomain(studyBlock, new Domain<>(subdomain));
+    }
+
+    private boolean endsBeforeBedTime(Interval interval) {
+        Day day = interval.endTime().day;
+        DayTime bedTime = new DayTime(day, GO_TO_BED_TIME);
+
+        return bedTime.before(interval.endTime());
     }
 
     private void addFixedTask(Task task) {
