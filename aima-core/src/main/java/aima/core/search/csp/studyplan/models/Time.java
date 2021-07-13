@@ -17,6 +17,10 @@ public class Time {
         return format(hours) + ":" + format(minutes);
     }
 
+    public boolean equals(Time other) {
+        return hours == other.hours && minutes == other.minutes;
+    }
+
     private String format(int number) {
         String str = String.valueOf(number);
         String zeroPaddedNumber = '0' + str;

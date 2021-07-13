@@ -14,12 +14,12 @@ public class Interval {
         int minutes = startTime.minutes() + duration.minutes;
         int hours = startTime.hours() + duration.hours;
 
-        while (minutes > 60) {
+        while (minutes >= 60) {
             minutes -= 60;
             hours++;
         }
 
-        while (hours > 24) {
+        while (hours >= 24) {
             hours -= 24;
             day = day.next();
         }
@@ -28,7 +28,10 @@ public class Interval {
     }
 
     public boolean overlapsWith(Interval other) {
-        return this.startTime.before(other.endTime()) && other.startTime.before(this.endTime());
+        boolean intervalsAreEqual = equals(other);
+        boolean intervalsIntersect = startTime.before(other.endTime()) && other.startTime.before(endTime());
+
+        return intervalsAreEqual || intervalsIntersect;
     }
 
     public String toString() {
@@ -42,5 +45,12 @@ public class Interval {
             .append(endTime().time.toString());
 
         return stringBuilder.toString();
+    }
+
+    public boolean equals(Interval other) {
+        boolean theyStartAtTheSameTime = startTime.equals(other.startTime);
+        boolean theyHaveTheSameDuration = duration.equals(other.duration);
+
+        return theyStartAtTheSameTime && theyHaveTheSameDuration;
     }
 }

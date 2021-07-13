@@ -26,7 +26,7 @@ public class DayTime {
             return hours() < other.hours();
         }
 
-        return minutes() <= other.minutes();
+        return minutes() < other.minutes();
     }
 
     public int hours() {
@@ -35,5 +35,9 @@ public class DayTime {
 
     public int minutes() {
         return time.minutes;
+    }
+
+    public boolean equals(DayTime other) {
+        return day.equals(other.day) && time.equals(other.time);
     }
 }

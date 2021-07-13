@@ -17,9 +17,17 @@ public class IntervalTest {
     }
 
     @Test
-    public void overlapShouldTrueIfIntervalsOverlap() {
+    public void overlapShouldReturnTrueIfIntervalsOverlap() {
         Interval one = new Interval(new DayTime(Day.Monday, new Time(7, 0)), new Time(1, 0));
         Interval another = new Interval(new DayTime(Day.Monday, new Time(7, 0)), new Time(1, 0));
+
+        Assert.assertTrue(one.overlapsWith(another));
+    }
+
+    @Test
+    public void overlapShouldReturnTrueIfIntervalsAreEqual() {
+        Interval one = new Interval(new DayTime(Day.Sunday, new Time(20, 0)), new Time(4, 0));
+        Interval another = new Interval(new DayTime(Day.Sunday, new Time(20, 0)), new Time(4, 0));
 
         Assert.assertTrue(one.overlapsWith(another));
     }
