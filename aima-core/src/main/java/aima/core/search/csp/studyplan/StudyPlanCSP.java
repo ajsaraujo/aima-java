@@ -58,7 +58,7 @@ public class StudyPlanCSP extends CSP<StudyBlock, DayTime> {
 
     public void showSchedule(Assignment<StudyBlock, DayTime> assignment) {
         for (Day day : Day.values()) {
-            System.out.println(day.name().toUpperCase());
+            System.out.println(day.name.toUpperCase());
 
             List<Task> todaysTasks = getTodaysFixedTasks(day);
 
@@ -73,6 +73,8 @@ public class StudyPlanCSP extends CSP<StudyBlock, DayTime> {
             for (Task task : todaysTasks) {
                 System.out.println(task.toString());
             }
+
+            System.out.println("");
         }
     }
 

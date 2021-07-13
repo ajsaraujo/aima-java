@@ -10,7 +10,7 @@ public enum Day {
     // Sunday(7, "Domingo");
 
     private final int index;
-    private final String name;
+    public final String name;
 
     Day(int index, String name) {
         this.index = index;
