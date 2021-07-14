@@ -70,6 +70,8 @@ public class StudyPlanCSP extends CSP<StudyBlock, DayTime> {
                 }
             }
 
+            todaysTasks.sort(new TaskStartTimeComparator());
+
             for (Task task : todaysTasks) {
                 System.out.println(task.toString());
             }
