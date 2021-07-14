@@ -138,7 +138,7 @@ public class StudyPlanCSP extends CSP<StudyBlock, DayTime> {
             Task breakfast = new Task("Café da Manhã", new DayTime(day, sevenAM), halfAnHour);
             Task lunch = new Task("Almoço", new DayTime(day, twelveAM), oneHour);
             Task dinner = new Task("Jantar", new DayTime(day, sevenPM), halfAnHour);
-            Task sleep = new Task("Dormir", new DayTime(day, GO_TO_BED_TIME), calculateSleepDuration());
+            Task sleep = new Sleep(new DayTime(day, GO_TO_BED_TIME), calculateSleepDuration());
 
             fixedTasks.add(breakfast);
             fixedTasks.add(lunch);
