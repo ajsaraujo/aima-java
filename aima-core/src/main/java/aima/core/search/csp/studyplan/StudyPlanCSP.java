@@ -66,7 +66,7 @@ public class StudyPlanCSP extends CSP<StudyBlock, DayTime> {
                 DayTime dayTime = assignment.getValue(studyBlock);
 
                 if (dayTime.day.equals(day)) {
-                    todaysTasks.add(new Task(studyBlock.getName(), dayTime, studyBlock.duration));
+                    todaysTasks.add(new Task(studyBlock.subjectName, dayTime, studyBlock.duration));
                 }
             }
 

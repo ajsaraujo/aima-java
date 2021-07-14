@@ -21,7 +21,7 @@ public class Subject {
     }
 
     public void addClass(Day day, Time startTime, Time duration) {
-        classes.add(new Task(name, new DayTime(day, startTime), duration));
+        classes.add(new Task("Aula de " + name, new DayTime(day, startTime), duration));
     }
 
     public void addStudyBlock(Time duration) {
