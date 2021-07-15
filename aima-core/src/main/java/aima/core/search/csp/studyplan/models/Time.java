@@ -22,6 +22,14 @@ public class Time {
         return new Time(hours, minutes);
     }
 
+    public boolean before(Time other) {
+        return hours < other.hours || minutes < other.minutes;
+    }
+
+    public boolean after(Time other) {
+        return hours > other.hours || minutes > other.minutes;
+    }
+
     public String toString() {
         return format(hours) + ":" + format(minutes);
     }

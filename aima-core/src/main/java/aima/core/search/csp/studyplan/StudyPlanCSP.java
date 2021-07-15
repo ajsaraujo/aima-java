@@ -130,7 +130,13 @@ public class StudyPlanCSP extends CSP<StudyBlock, DayTime> {
 
             boolean studyWillEndBeforeMidnight = !interval.endsPastMidnight();
             boolean studyWillEndBeforeBedTime = !endsBeforeBedTime(interval);
-            boolean startTimeIsValid = studyWillEndBeforeMidnight && studyWillEndBeforeBedTime;
+            boolean fitsBedTimeConstraints = studyWillEndBeforeBedTime && studyWillEndBeforeMidnight;
+
+            boolean canBeDoneOutsideOfficeHours = !studyBlock.officeHoursOnly;
+            boolean isInsideOfficeHours = value.time.after(new Time(8, 0)) && value.time.before(new Time(18, 1));
+            boolean fitsOfficeHoursConstraints = canBeDoneOutsideOfficeHours || isInsideOfficeHours;
+
+            boolean startTimeIsValid = fitsBedTimeConstraints && fitsOfficeHoursConstraints;
 
             if (startTimeIsValid) {
                 subdomain.add(value);

@@ -10,6 +10,7 @@ import aima.core.search.csp.Variable;
 public class StudyBlock extends Variable {
     public final Time duration;
     public String subjectName;
+    public boolean officeHoursOnly = false;
 
     public StudyBlock(String name, Time duration) {
         super(name);

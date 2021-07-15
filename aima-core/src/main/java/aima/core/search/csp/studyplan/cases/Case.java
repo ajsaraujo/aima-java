@@ -61,7 +61,8 @@ public abstract class Case {
                 System.out.print("Horas semanais: ");
                 int weeklyHours = scanner.nextInt();
 
-                activities.add(new ExtracurricularActivity(description, weeklyHours));
+                boolean canBeDoneOutsideOfficeHours = promptUser("Essa atividade pode ser praticada FORA do horário comercial (08-18h)? ");
+                activities.add(new ExtracurricularActivity(description, weeklyHours, !canBeDoneOutsideOfficeHours));
 
                 boolean userWantsToAddAnotherOne = promptUser("Adicionar outra atividade?");
 
