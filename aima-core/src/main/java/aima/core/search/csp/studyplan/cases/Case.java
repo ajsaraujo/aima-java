@@ -1,6 +1,5 @@
 package aima.core.search.csp.studyplan.cases;
 
-import aima.core.search.csp.CSP;
 import aima.core.search.csp.studyplan.StudyPlanCSP;
 import aima.core.search.csp.studyplan.models.*;
 
@@ -8,6 +7,7 @@ import java.util.*;
 
 public abstract class Case {
     private ArrayList<Subject> subjects = new ArrayList<>();
+    private ArrayList<ExtracurricularActivity> activities = new ArrayList<>();
     private Scanner scanner = new Scanner(System.in);
 
     public List<Subject> getSubjects() {
@@ -28,13 +28,14 @@ public abstract class Case {
         }
 
         System.out.println("Atividades Extra curriculares");
-        List<ExtracurricularActivity> activities = readExtraCurricularActivities();
+        activities = readExtraCurricularActivities();
     }
 
     public StudyPlanCSP toCSP() {
         StudyPlanCSP csp = new StudyPlanCSP();
 
         subjects.forEach(csp::addSubject);
+        activities.forEach(csp::addExtraCurricularActivity);
 
         csp.loadConstraints();
 
@@ -45,8 +46,8 @@ public abstract class Case {
         subjects.add(subject);
     }
 
-    private List<ExtracurricularActivity> readExtraCurricularActivities() {
-        List<ExtracurricularActivity> activities = new ArrayList<>();
+    private ArrayList<ExtracurricularActivity> readExtraCurricularActivities() {
+        ArrayList<ExtracurricularActivity> activities = new ArrayList<>();
 
         boolean addExtraCurricularActivities = promptUser("Adicionar atividades extra curriculares?");
 

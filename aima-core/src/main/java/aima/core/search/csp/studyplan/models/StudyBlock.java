@@ -16,7 +16,12 @@ public class StudyBlock extends Variable {
 
         String[] parts = name.split(" ");
 
-        this.subjectName = parts[0] + " " + parts[1];
+        this.subjectName = parts[0];
+
+        for (int i = 1; i < parts.length - 1; i++) {
+            subjectName += " " + parts[i];
+        }
+
         this.duration = duration;
     }
 }

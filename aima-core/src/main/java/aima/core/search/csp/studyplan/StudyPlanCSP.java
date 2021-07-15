@@ -56,6 +56,10 @@ public class StudyPlanCSP extends CSP<StudyBlock, DayTime> {
         subject.getClasses().forEach(this::addFixedTask);
     }
 
+    public void addExtraCurricularActivity(ExtracurricularActivity activity) {
+        activity.getStudyBlocks().forEach(this::addStudyBlock);
+    }
+
     public void showSchedule(Assignment<StudyBlock, DayTime> assignment) {
         for (Day day : Day.values()) {
             System.out.println(day.name.toUpperCase());
