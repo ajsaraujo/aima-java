@@ -9,7 +9,6 @@ import aima.core.search.csp.studyplan.cases.FirstCase;
 import aima.core.search.csp.studyplan.cases.SecondCase;
 import aima.core.search.csp.studyplan.cases.ThirdCase;
 import aima.core.search.csp.studyplan.models.DayTime;
-import aima.core.search.csp.studyplan.models.Interval;
 import aima.core.search.csp.studyplan.models.StudyBlock;
 
 import java.util.Optional;

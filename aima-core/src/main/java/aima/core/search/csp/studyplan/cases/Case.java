@@ -2,15 +2,9 @@ package aima.core.search.csp.studyplan.cases;
 
 import aima.core.search.csp.CSP;
 import aima.core.search.csp.studyplan.StudyPlanCSP;
-import aima.core.search.csp.studyplan.models.DayTime;
-import aima.core.search.csp.studyplan.models.StudyBlock;
-import aima.core.search.csp.studyplan.models.Subject;
-import aima.core.search.csp.studyplan.models.Time;
+import aima.core.search.csp.studyplan.models.*;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public abstract class Case {
     private ArrayList<Subject> subjects = new ArrayList<>();
@@ -32,6 +26,9 @@ public abstract class Case {
                 subject.addStudyBlock(studyBlock);
             }
         }
+
+        System.out.println("Atividades Extra curriculares");
+        List<ExtracurricularActivity> activities = readExtraCurricularActivities();
     }
 
     public StudyPlanCSP toCSP() {
@@ -46,6 +43,50 @@ public abstract class Case {
 
     protected void addSubject(Subject subject) {
         subjects.add(subject);
+    }
+
+    private List<ExtracurricularActivity> readExtraCurricularActivities() {
+        List<ExtracurricularActivity> activities = new ArrayList<>();
+
+        boolean addExtraCurricularActivities = promptUser("Adicionar atividades extra curriculares?");
+
+        if (addExtraCurricularActivities) {
+            while (true) {
+                System.out.println("Nova atividade extra curricular");
+
+                System.out.print("Descrição: ");
+                String description = scanner.next();
+
+                System.out.print("Horas semanais: ");
+                int weeklyHours = scanner.nextInt();
+
+                activities.add(new ExtracurricularActivity(description, weeklyHours));
+
+                boolean userWantsToAddAnotherOne = promptUser("Adicionar outra atividade?");
+
+                if (!userWantsToAddAnotherOne) {
+                    break;
+                }
+            }
+        }
+
+        return activities;
+    }
+
+    private boolean promptUser(String prompt) {
+        String fullPrompt = prompt + " (s/n) ";
+        String answer = "x";
+
+        while (!answer.equals("S") && !answer.equals("N")) {
+            System.out.print(fullPrompt);
+            answer = scanner.next().toUpperCase();
+
+            if (!answer.equals("S") && !answer.equals("N")) {
+                System.out.println("Desculpe, não entendi.");
+            }
+        }
+
+        return answer.equals("S");
     }
 
     private Time readStudyBlock() {
