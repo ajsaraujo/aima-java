@@ -13,6 +13,15 @@ public class Time {
         this.minutes = minutes;
     }
 
+    public static Time getDuration(Time startTime, Time endTime) {
+        int minutesPassed = endTime.inMinutes() - startTime.inMinutes();
+
+        int hours = minutesPassed / 60;
+        int minutes = minutesPassed % 60;
+
+        return new Time(hours, minutes);
+    }
+
     public String toString() {
         return format(hours) + ":" + format(minutes);
     }
@@ -25,5 +34,9 @@ public class Time {
         String str = String.valueOf(number);
         String zeroPaddedNumber = '0' + str;
         return str.length() >= 2 ? str : zeroPaddedNumber;
+    }
+
+    private int inMinutes() {
+        return hours * 60 + minutes;
     }
 }

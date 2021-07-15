@@ -76,12 +76,33 @@ public class StudyPlanCSP extends CSP<StudyBlock, DayTime> {
 
             todaysTasks.sort(new TaskStartTimeComparator());
 
-            for (Task task : todaysTasks) {
+            for (Task task : agglutinate(todaysTasks)) {
                 System.out.println(task.toString());
             }
 
             System.out.println("");
         }
+    }
+
+    private List<Task> agglutinate(List<Task> tasks) {
+        List<Task> agglutinatedList = new ArrayList<>();
+
+        for (Task task : tasks) {
+            if (agglutinatedList.isEmpty()) {
+                agglutinatedList.add(task);
+            } else {
+                int lastIndex = agglutinatedList.size() - 1;
+                Task lastTask = agglutinatedList.get(lastIndex);
+
+                if (task.shouldBeAgglutinated(lastTask)) {
+                    agglutinatedList.set(lastIndex, Task.agglutinate(lastTask, task));
+                } else {
+                    agglutinatedList.add(task);
+                }
+            }
+        }
+
+        return agglutinatedList;
     }
 
     private List<Task> getTodaysFixedTasks(Day day) {
